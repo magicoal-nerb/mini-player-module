@@ -1,0 +1,20 @@
+{
+  "name": "player-module",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "$ignoreUnknownInstances": true,
+      
+      "mini-player-module": {
+	"$path": "mini-player-module",
+        "$ignoreUnknownInstances": true
+      },
+
+      "Runner": {
+	"$path": "Runner.server.luau",
+        "$ignoreUnknownInstances": true
+      }
+    }
+  }
+}
