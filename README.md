@@ -1,2 +1,18 @@
 # mini-player-module
-recreated player module. does the old roblox camera types for funsies
+Minimalist recreation of Roblox's Player Module alongside the old Roblox Camera types.
+
+## Info
+This version of the player module runs significantly faster than Roblox's current Player Module,   
+but it is also much more specific.
+
+## Showcase
+https://github.com/user-attachments/assets/348d062c-8324-432e-ae05-12487a2d4f65
+
+## Usage
+This project can be built through [Rojo](https://rojo.space)
+
+```bash
+git clone "https://github.com/magicoal-nerb/impulse.git"
+cd lua-luau
+rojo serve
+```
