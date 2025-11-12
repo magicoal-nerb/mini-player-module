@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/348d062c-8324-432e-ae05-12487a2d4f65
 This project can be built through [Rojo](https://rojo.space)
 
 ```bash
-git clone "https://github.com/magicoal-nerb/impulse.git"
+git clone "https://github.com/magicoal-nerb/mini-player-module.git"
 cd lua-luau
 rojo serve
 ```
