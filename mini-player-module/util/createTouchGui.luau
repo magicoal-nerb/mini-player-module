@@ -25,6 +25,7 @@ return function()
 		DisplayOrder = 6767,
 		SafeAreaCompatibility = Enum.SafeAreaCompatibility.FullscreenExtension,
 		ClipToDeviceSafeArea = false,
+		ResetOnSpawn = false,
 	}, {
 		ThumbstickFrame = createElement("Frame", {
 			BackgroundTransparency = 1.0,
