@@ -7,12 +7,7 @@
       "$ignoreUnknownInstances": true,
       
       "mini-player-module": {
-	"$path": "mini-player-module",
-        "$ignoreUnknownInstances": true
-      },
-
-      "Runner": {
-	"$path": "Runner.server.luau",
+	      "$path": "mini-player-module",
         "$ignoreUnknownInstances": true
       }
     }

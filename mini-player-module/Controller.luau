@@ -25,6 +25,7 @@ export type Input = {
 
 export type Controller = typeof(setmetatable({} :: {
 	subject: Humanoid?,
+	context: InputContext,
 	jump: InputAction,
 	move: InputAction,
 }, Controller))
@@ -54,6 +55,7 @@ function Controller.getWishDirection(
 end
 
 function Controller.setContext(self: Controller, context: InputContext)
+	self.context = context
 	self.jump = context:WaitForChild("Jump") :: InputAction
 	self.move = context:WaitForChild("Move") :: InputAction
 end
@@ -66,9 +68,13 @@ function Controller.setSubject(
 end
 
 function Controller.update(self: Controller, input: Input)
+	if not self.context then
+		return
+	end
+	
 	local wishDirection = self:getWishDirection(input)
-	InputContexts.Jump:Fire(input.wishJump)
-	InputContexts.Move:Fire(wishDirection)
+	self.jump:Fire(input.wishJump)
+	self.move:Fire(wishDirection)
 end
 
 function Controller.step(self: Controller, dt: number)

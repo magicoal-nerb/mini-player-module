@@ -17,6 +17,7 @@ local function characterAdded(character: Model)
 	local humanoid = character:WaitForChild("Humanoid") :: Humanoid
 	Camera:setSubject(humanoid)
 	Controller:setSubject(humanoid)
+	Controller:setContext(InputContexts)
 	RunService:SetPredictionMode(
 		humanoid.RootPart :: BasePart,
 		Enum.PredictionMode.On
