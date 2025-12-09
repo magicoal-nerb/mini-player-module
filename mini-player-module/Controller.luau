@@ -24,7 +24,9 @@ export type Input = {
 }
 
 export type Controller = typeof(setmetatable({} :: {
-	subject: Humanoid?
+	subject: Humanoid?,
+	jump: InputAction,
+	move: InputAction,
 }, Controller))
 
 local function quaternionXZ(quat: CFrame): CFrame
@@ -37,6 +39,25 @@ local function quaternionXZ(quat: CFrame): CFrame
 	) * quat
 end
 
+function Controller.getWishDirection(
+	self: Controller,
+	input: Input
+): Vector3
+	local wishPlane = quaternionXZ(CurrentCamera.CFrame.Rotation)
+	local wishDirection = input.wishDirection
+
+	if wishDirection.Magnitude > 1e-2 then
+		return wishPlane * wishDirection
+	else
+		return Vector3.zero
+	end
+end
+
+function Controller.setContext(self: Controller, context: InputContext)
+	self.jump = context:WaitForChild("Jump") :: InputAction
+	self.move = context:WaitForChild("Move") :: InputAction
+end
+
 function Controller.setSubject(
 	self: Controller,
 	subject: Humanoid
@@ -44,29 +65,21 @@ function Controller.setSubject(
 	self.subject = subject
 end
 
-function Controller.update(
-	self: Controller,
-	input: Input,
-	dt: number
-)
-	if not self.subject then
-		-- Don't update movement
-		-- without a humanoid
-		return
-	end
-	
-	local wishPlane = quaternionXZ(CurrentCamera.CFrame.Rotation)
-	local wishDirection = input.wishDirection
-	
-	if wishDirection.Magnitude > 1e-2 then
-		-- Player is currently moving
-		self.subject:Move(wishPlane * wishDirection, false)
-	else
-		-- Player is idling
-		self.subject:Move(Vector3.zero, false)
-	end
-	
-	self.subject.Jump = input.wishJump
+function Controller.update(self: Controller, input: Input)
+	local wishDirection = self:getWishDirection(input)
+	InputContexts.Jump:Fire(input.wishJump)
+	InputContexts.Move:Fire(wishDirection)
 end
 
-return setmetatable({}, Controller) :: Controller
+function Controller.step(self: Controller, dt: number)
+	local subject = self.subject
+	if not subject then
+		return
+	end
+
+	-- Get the current state of these
+	subject.Jump = self.jump:GetState()
+	subject:Move(self.move:GetState(), false)
+end
+
+return Controller

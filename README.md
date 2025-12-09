@@ -1,5 +1,6 @@
 # mini-player-module
-Minimalist recreation of Roblox's Player Module alongside the old Roblox Camera types.
+Minimalist recreation of Roblox's Player Module alongside the old Roblox Camera types.   
+*This is the server authorative branch of the player module!!*   
 
 ## Info
 This version of the player module runs significantly faster than Roblox's current Player Module, but that also means some features might be missing as a result. However, this project is meant to be built upon with other custom logic.
